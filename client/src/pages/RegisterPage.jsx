@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+ import { toast } from 'react-toastify';
 import { FaArrowUp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [errors, seterrors] = useState({});
+  const [loading, setloading] = useState(false)
   const navigate = useNavigate();
 
   const [formData, setformData] = useState({
@@ -29,6 +31,7 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setloading(true)
     let newErrors = {};
     let specialCharactor = /[!@#$%^&*(),.?":{}|<>_\-\\[\]\/+=~`]/;
     let capitalized = /[A-Z]/;
@@ -77,13 +80,17 @@ const Register = () => {
 
       if (response.ok) {
         console.log(response.message);
+        setloading(false)
+        toast.success('Signup sucessfull')
         navigate("/login");
       } else {
         console.log(`registerration failed error ${response.message} `);
+        setloading(false)
         
       }
     } catch (err) {
       console.log("registered failed", err.message);
+      setloading(false)
     }
   };
 
@@ -180,8 +187,8 @@ const Register = () => {
             )}
 
             <div className="flex justify-center items-center my-6 w-full">
-              <button className=" font-mono bg-blue-900 rounded-2xl w-1/2 p-2 text-center text-[20px] md:text-3xl hover:scale-95 active:scale-100 transition-active duration-300">
-                Register
+              <button disabled={loading} className=" font-mono bg-blue-900 rounded-2xl w-1/2 p-2 text-center text-[20px] md:text-3xl hover:scale-95 active:scale-100 transition-active duration-300 disabled:bg-blue-600">
+                {loading ? 'Register...' : 'Register' }
               </button>
             </div>
           </form>
