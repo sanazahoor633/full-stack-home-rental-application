@@ -12,17 +12,12 @@ const LoginPage = () => {
   const [errors, seterrors] = useState(false);
   const [loading, setloading] = useState(false)
 
-  console.log(email, password);
+  // console.log(email, password);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     setloading(true)
 
-    // if(password === '' || email === ''){
-    //   seterrors(true)
-    // }
-    // else {
-    //   seterrors(false)
-    // }
+  
 
     try {
       const response = await fetch("http://localhost:3030/auth/login", {
@@ -33,7 +28,7 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
       let loggedIn = await response.json();
-      console.log(loggedIn);
+      // console.log(loggedIn);
 
 if (!response.ok) {
       toast.error(loggedIn.message || "Login failed");
@@ -61,9 +56,12 @@ if (!response.ok) {
     }
   };
   return (
-    <div className="div w-full md:h-screen sm:h-screen bg-gray-700 flex justify-center items-center p-4">
+    <div className="bg-[url('https://plus.unsplash.com/premium_photo-1661964014750-963a28aeddea?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center div w-full md:h-screen sm:h-screen bg-gray-700 flex justify-center items-center p-4">
       <div className="container h-fit lg:w-[40%] md:w-[80%]  bg-black/70 px-10 py-10 text-white rounded-2xl hover:scale-105 transition-transform transform duration-300 hover:bg-black ">
         <form onSubmit={onSubmitHandler} action="" className="my-4">
+          <h1 className="text-center text-4xl tracking-tighter font-semibold font-mono">
+              Login
+            </h1>
           <input
             type="email"
             className="p-2 border-b-1 border-gray-700 mt-4 mb-0  w-full outline-none text-white "

@@ -1,26 +1,46 @@
-@import "tailwindcss";
+/* // @use "./variable.scss";
+
+}
+//   &:hover {
+//     @include shadow;
+//   } */
+
+ .listing-card {
+   position: relative;
+   cursor: pointer;
+   padding: 10px;
+   border-radius: 10px;
+
+ }
 
 
 
-/* 
+
+ .listing-card {
+   position: relative;
+  cursor: pointer;
+   padding: 10px;
+  border-radius: 10px;
+}
+
 .slider-container {
-  width: 300px;
+  width: 400px;
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 10px;
-
+}
   .slider {
     display: flex;
     transition: transform 0.5s ease;
-
+  }
     .slide {
       position: relative;
       flex: 0 0 100%;
       width: 100%;
-      height: 270px;
+      height: 400px;
       display: flex;
       align-items: center;
-
+    }
       img {
         width: 100%;
         height: 100%;
@@ -41,11 +61,11 @@
         justify-content: center;
         background-color: rgba(255, 255, 255, 0.7);
         z-index: 9999;
-
+      }
         &:hover {
           background-color: white;
         }
-      }
+      
 
       .prev-button {
         left: 10px;
@@ -54,23 +74,21 @@
       .next-button {
         right: 10px;
       }
-    }
-  }
-}
+    
 
-h3 {
+.slide h3 {
   font-size: 18px;
+  font-weight: 800;
 }
 
-p {
+.slide p {
   font-size: 16px;
 }
 
-span {
+.slide span {
   font-weight: 700;
   font-size: 18px;
 }
-
 .favorite {
   position: absolute;
   right: 20px;
@@ -80,4 +98,9 @@ span {
   cursor: pointer;
   z-index: 999;
   background: none;
+}
+
+/* .slider {
+  background-color: black ;
 } */
+/* // } */

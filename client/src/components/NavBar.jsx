@@ -27,9 +27,9 @@ const NavBar = () => {
       <div className="right flex items-center gap-2">
 {user ? (<Link to='/create-listing' className='md:text-[20px] font-semibold tracking-tight' >Become a host </Link>) : (<Link to='/login' className='md:text-[20px] font-semibold tracking-tight' >Become a host </Link>) }
 
-<button onClick={()=> setdropdownMenu(!dropdownMenu)} className='flex items-center border-2 border-gray-400 rounded-3xl justify-center gap-5 h-14 px-2'>
-< CiMenuBurger className='text-black font-semibold text-2xl' />
-{ !user ? ( < MdPerson className='text-black font-semibold text-4xl' /> ): (<img className='h-12 w-12 rounded-full overflow-hidden ' src={`http://localhost:3030/${user. profileImagePath.replace("public", "")}`} alt="profile picture" />)  }
+<button onClick={()=> setdropdownMenu(!dropdownMenu)} className='flex items-center border-2 border-gray-400 rounded-xl justify-center gap-5 h-16 px-2 py-1'>
+< CiMenuBurger className='text-black font-semibold text-4xl' />
+{ !user || !user.profileImagePath ? ( < MdPerson className='text-black font-semibold text-4xl' /> ): (<img className='h-full w-full object-cover object-center rounded-full overflow-hidden ' src={`http://localhost:3030//${user.profileImagePath.replace("public", "")}`} alt="profile picture" />)  }
 </button>
 
 

@@ -27,7 +27,7 @@ const Register = () => {
     }
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -79,7 +79,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        console.log(response.message);
+        // console.log(response.message);
         setloading(false)
         toast.success('Signup sucessfull')
         navigate("/login");
@@ -96,12 +96,12 @@ const Register = () => {
 
   return (
     <div>
-      <div className="div w-full md:h-screen sm:h-screen bg-gray-700 flex justify-center items-center p-4">
+      <div className=" bg-[url('https://plus.unsplash.com/premium_photo-1681224438035-e8e0ec5e6021?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center div w-full md:h-screen sm:h-screen bg-gray-700 flex justify-center items-center p-4">
         <div className="container h-fit lg:w-[40%] md:w-[90%]  bg-black/70 px-10 py-5 text-white rounded-2xl hover:scale-105 transition-transform transform duration-300 hover:bg-black ">
           <form action="" className="" onSubmit={submitHandler}>
-            <h3 className="text-center text-4xl tracking-tighter font-semibold font-mono">
+            <h1 className="text-center text-4xl tracking-tighter font-semibold font-mono">
               Register
-            </h3>
+            </h1>
             <input
               type="text"
               className="p-2 border-b-1 border-gray-700 mt-4 mb-0 w-full outline-none text-white "
@@ -170,6 +170,7 @@ const Register = () => {
               onChange={handleOnchange}
             />
 
+<div className="flex flex-col justify-center items-center"> 
             <label
               htmlFor="profileImage"
               className="flex flex-col items-center gap-2 mt-3"
@@ -179,14 +180,21 @@ const Register = () => {
             </label>
 
             {formData.profileImage && (
+              <div className="h-[100px] w-[100px]">
               <img
                 src={URL.createObjectURL(formData.profileImage)}
                 alt="profile photo"
-                className="w-25 h-25 object-cover rounded-full mt-4 mx-auto"
+                className="w-full h-full object-cover rounded-md mt-4 mx-auto"
               />
+             
+              </div>
+
+
             )}
+            </div>
 
             <div className="flex justify-center items-center my-6 w-full">
+             
               <button disabled={loading} className=" font-mono bg-blue-900 rounded-2xl w-1/2 p-2 text-center text-[20px] md:text-3xl hover:scale-95 active:scale-100 transition-active duration-300 disabled:bg-blue-600">
                 {loading ? 'Register...' : 'Register' }
               </button>

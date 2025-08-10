@@ -5,6 +5,7 @@ import Homepage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
   import { ToastContainer } from 'react-toastify';
 import CreateListing from './pages/CreateListing'
+import ListingDetail from './pages/ListingDetail'
 
 
 
@@ -17,7 +18,7 @@ const App = () => {
 <Route path='/register' element={<RegisterPage />} />
 <Route path='/login' element={<LoginPage />} />
 <Route path='/create-listing' element={<CreateListing />} />
-
+<Route path='/properties/:listingId' element={<ListingDetail />} />
 </Routes>
 
     </div>

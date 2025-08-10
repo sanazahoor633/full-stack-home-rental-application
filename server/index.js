@@ -13,16 +13,20 @@ app.use(express.urlencoded({extended: true}))
 import mongoConnection from "./config/db.js";
 import dotenv from "dotenv";
 import authRouter from './routes/authRoute.js'
+import listingRoute from './routes/listingRoute.js'
 dotenv.config();
 mongoConnection();
 
-app.get("/", (req, res) => {
-  res.send("i am sanakhan");
-});
+
+
+// app.get("/", (req, res) => {
+//   res.send("i am sanakhan");
+// });
 
 
 
 app.use('/auth', authRouter)
+app.use('/properties', listingRoute)
 
 
 
