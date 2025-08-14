@@ -49,44 +49,38 @@ const Listings = () => {
       </div>
 
       {/* do flex listing card */}
-<div className="flex flex-wrap items-center justify-center gap-4 ">
-      {loading ? (
-        <Loading />
-      ) : (  
-        listings.map(
-          (
-            {_id,
-            creator,
-            listingPhotoPaths,
-            city,
-            province,
-            country,
-            category,
-            type,
-            price}, 
-
-          ) => (   
-            <ListingCard
-             key={_id}
-              listingId={_id}
-              creator={creator}
-              listingPhotoPaths={listingPhotoPaths}
-              city={city}
-              province={province}
-              category={category}
-              type={type}
-              price={price}
-              country={country}
-             
-             
-            />
-         
+      <div className="flex flex-wrap items-center justify-center gap-4 ">
+        {loading ? (
+          <Loading />
+        ) : (
+          listings.map(
+            ({
+              _id,
+              creator,
+              listingPhotoPaths,
+              city,
+              province,
+              country,
+              category,
+              type,
+              price,
+            }) => (
+              <ListingCard
+                key={_id}
+                listingId={_id}
+                creator={creator}
+                listingPhotoPaths={listingPhotoPaths}
+                city={city}
+                province={province}
+                category={category}
+                type={type}
+                price={price}
+                country={country}
+              />
+            )
           )
-        )
-      )}
-   
-
-</div>
+        )}
+      </div>
     </div>
   );
 };

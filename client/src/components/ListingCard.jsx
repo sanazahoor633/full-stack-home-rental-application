@@ -15,7 +15,7 @@ const ListingCard = ({
   price,
   country,
 }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [currentIndex, setcurrentIndex] = useState(0);
   const goToPrevSlide = () => {
     setcurrentIndex(
@@ -29,8 +29,9 @@ const ListingCard = ({
   };
 
   return (
-    <div className="listing-card hover:shadow-2xl hover:shadow-black "
-          onClick={() => {
+    <div
+      className="listing-card hover:shadow-2xl hover:shadow-black "
+      onClick={() => {
         navigate(`/properties/${listingId}`);
       }}
     >
