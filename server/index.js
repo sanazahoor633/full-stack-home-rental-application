@@ -12,8 +12,10 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}))
 import mongoConnection from "./config/db.js";
 import dotenv from "dotenv";
-import authRouter from './routes/authRoute.js'
-import listingRoute from './routes/listingRoute.js'
+import authRouter from './routes/authRoute.js';
+import listingRoutes from './routes/listingRoute.js';
+import bookingRoutes from './routes/bookingRoute.js';
+import userRoutes from './routes/user.js'
 dotenv.config();
 mongoConnection();
 
@@ -26,7 +28,9 @@ mongoConnection();
 
 
 app.use('/auth', authRouter)
-app.use('/properties', listingRoute)
+app.use('/properties', listingRoutes);
+app.use('/bookings', bookingRoutes);
+app.use('/users', userRoutes)
 
 
 

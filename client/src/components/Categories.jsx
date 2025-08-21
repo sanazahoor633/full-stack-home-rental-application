@@ -16,19 +16,10 @@ const Categories = () => {
       </p>
 
       <div className="categories-list flex flex-wrap items-center justify-center gap-4">
-        {/* <div className='category rounded-2xl overflow-hidden h-[400px] w-[400px] relative flex justify-center items-center'>
-  <img className='h-full w-full object-center object-cover absolute' src="http://2.bp.blogspot.com/-DbNcUe_6m70/UCAFg3dIn0I/AAAAAAAABq0/SQEjj6p5sFk/s1600/Wallpaper+Indah+Islami+-+Proud+To+Be+Muslim+-+ziedelefernideviantartcom.png" alt="" />
-<div className="overlay relative flex justify-center items-center w-full h-full bg-black/80 hover:h-[85%] hover:w-[85%] transition-all duration-300 ease-in-out">
-<div className="category-text flex flex-col">
-  <div className='text-4xl font-mono text-white tracking-tight'>icon</div>
-  <p className='text-4xl font-mono text-white tracking-tight'>category name</p>
-  </div>
-
-</div>
-</div> */}
+     
 
         {categories?.slice(1, 7).map((category, index) => (
-          <Link to="" key={index}>
+          <Link to={`/properties/category/${category.label}`} key={index}>
             <div
               className="category rounded-lg overflow-hidden h-[500px] w-[500px] relative flex justify-center items-center"
               key={index}

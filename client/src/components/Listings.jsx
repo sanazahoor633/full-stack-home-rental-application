@@ -22,6 +22,10 @@ const Listings = () => {
         }
       );
       const data = await response.json();
+      // console.log(data);
+      
+      // if(!data) return console.log(data.message);
+      
       dispatch(setListings({ listings: data }));
       setloading(false);
     } catch (err) {
@@ -31,16 +35,16 @@ const Listings = () => {
   useEffect(() => {
     getFeedListings();
   }, [selectedCategory]);
-  console.log(listings);
+  // console.log(listings);
 
   return (
     <div className="category-list">
-      <div className="categories-boxes my-8 flex flex-wrap justify-center items-center gap-4 ">
+      <div className="categories-boxes   my-8 flex flex-wrap justify-center items-center gap-4 ">
         {categories.map((category, index) => (
           <div
             onClick={() => setselectedCategory(category.label)}
             key={index}
-            className={` text border-2 border-gray-500 h-[200px] w-[280px] flex flex-col items-center gap-2 justify-center rounded-lg  active:scale-95 transition-all duration-200 ease-in-out`}
+            className={`category ${category.label === selectedCategory ? 'selected' : '' }  text shadow shadow-blue-400 h-[100px] w-[180px] flex flex-col items-center gap-2 justify-center rounded-lg  active:scale-95 transition-all duration-200 ease-in-out`}
           >
             <div className="icon text-2xl ">{category.icon}</div>
             <div className={`text text-2xl  `}>{category.label}</div>
@@ -64,6 +68,7 @@ const Listings = () => {
               category,
               type,
               price,
+              booking= false
             }) => (
               <ListingCard
                 key={_id}
@@ -76,6 +81,7 @@ const Listings = () => {
                 type={type}
                 price={price}
                 country={country}
+                booking={booking}
               />
             )
           )

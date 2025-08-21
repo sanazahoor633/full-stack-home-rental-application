@@ -8,28 +8,35 @@ import { setLogout } from "../redux/state";
 import TripModel from "./TripModel";
 import { IoHome } from "react-icons/io5";
 const NavBar = () => {
+  const [search, setsearch] = useState("");
+  const navigate = useNavigate();
   const [dropdownMenu, setdropdownMenu] = useState(false);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (
     <div className="w-full flex items-center justify-between p-4 md:px-12 border-b border-gray-300 ">
-      <div className="icon">
-        <IoHome className="text-5xl" />
-      </div>
+      <Link to={"/"}>
+        <div className="icon">
+          <IoHome className="text-5xl" />
+        </div>
+      </Link>
       <div className="search flex items-center justify-between border-1 border-gray-400 rounded-full w-1/4  p-2 px-4 opacity-0 md:opacity-100">
         <input
           className="text-1xl outline-none w-full p-2"
           type="text"
           placeholder="search everything"
+          value={search}
+          onChange={(e) => setsearch(e.target.value)}
         />
-        <FaSearch className="text-2xl text-orange-500 " />
+        <FaSearch className="text-2xl text-orange-500 " disabled={search === ''} 
+        onClick={() => { navigate(`/properties/search/${search}`) }}
+        />
       </div>
 
       <div className="right flex items-center gap-2">
         {user ? (
-          <Link
-            to="/create-listing"
+          <Link to="/create-listing"
             className="md:text-[20px] font-semibold tracking-tight"
           >
             Become a host{" "}

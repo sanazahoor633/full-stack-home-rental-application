@@ -5,22 +5,19 @@
 //     @include shadow;
 //   } */
 
- .listing-card {
-   position: relative;
-   cursor: pointer;
-   padding: 10px;
-   border-radius: 10px;
-
- }
-
-
-
-
- .listing-card {
-   position: relative;
+/* .listing-card {
+  position: relative;
   cursor: pointer;
-   padding: 10px;
+  padding: 10px;
   border-radius: 10px;
+} */
+
+.listing-card {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+
 }
 
 .slider-container {
@@ -29,61 +26,62 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
-  .slider {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-    .slide {
-      position: relative;
-      flex: 0 0 100%;
-      width: 100%;
-      height: 400px;
-      display: flex;
-      align-items: center;
-    }
-      img {
-        width: 100%;
-        height: 100%;
-        filter: brightness(85%);
-      }
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+}
+img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(85%);
+}
 
-      .prev-button,
-      .next-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 6px;
-        border-radius: 50%;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 0.7);
-        z-index: 9999;
-      }
-        &:hover {
-          background-color: white;
-        }
-      
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
+.next-button:hover {
+  background-color: white;
+}
+.prev-button:hover {
+  background-color: white;
+}
 
-      .prev-button {
-        left: 10px;
-      }
+.prev-button {
+  left: 10px;
+}
 
-      .next-button {
-        right: 10px;
-      }
-    
+.next-button {
+  right: 10px;
+}
 
 .slide h3 {
   font-size: 18px;
   font-weight: 800;
 }
 
-.slide p {
+/* .slide p {
   font-size: 16px;
-}
+} */
 
 .slide span {
   font-weight: 700;

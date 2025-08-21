@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const CreateListing = () => {
   // upload drag and drop photos
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [category, setcategory] = useState("");
   const [amenities, setamenities] = useState([]);
   const [type, settype] = useState("");
@@ -82,66 +82,60 @@ const CreateListing = () => {
     setformDescription({ ...formDescription, [name]: value });
   };
 
-  const creatorId = useSelector((state) => state.user?._id)
+  const creatorId = useSelector((state) => state.user?._id);
 
-const handlePost = async (e) => {
-  e.preventDefault();
+  const handlePost = async (e) => {
+    e.preventDefault();
 
+    try {
+      const listingForm = new FormData();
+      listingForm.append("creator", creatorId);
+      listingForm.append("category", category);
+      listingForm.append("type", type);
+      listingForm.append("streetAdress", formLocation.streetAdress);
+      listingForm.append("aptSuite", formLocation.aptSuite);
+      listingForm.append("city", formLocation.city);
+      listingForm.append("province", formLocation.province);
+      listingForm.append("country", formLocation.country);
+      listingForm.append("guestCount", guestCount);
+      listingForm.append("bedroomsCount", bedroomsCount);
+      listingForm.append("bedCount", bedCount);
+      listingForm.append("bathrooms", bathrooms);
+      listingForm.append("amenities", amenities);
+      listingForm.append("title", formDescription.title);
+      listingForm.append("description", formDescription.description);
+      listingForm.append("highlight", formDescription.highlight);
+      listingForm.append("highlightDesc", formDescription.highlightDesc);
+      listingForm.append("price", formDescription.price);
 
-  try{
-const listingForm = new FormData();
-listingForm.append('creator', creatorId)
-listingForm.append('category', category)
-listingForm.append('type', type)
-listingForm.append('streetAdress', formLocation.streetAdress )
-listingForm.append('aptSuite', formLocation.aptSuite )
-listingForm.append('city', formLocation.city )
-listingForm.append('province', formLocation.province )
-listingForm.append('country', formLocation.country )
-listingForm.append('guestCount', guestCount)
-listingForm.append('bedroomsCount', bedroomsCount)
-listingForm.append('bedCount', bedCount)
-listingForm.append('bathrooms', bathrooms);
-listingForm.append('amenities', amenities);
-listingForm.append('title', formDescription.title);
-listingForm.append('description', formDescription.description);
-listingForm.append('highlight', formDescription.highlight);
-listingForm.append('highlightDesc', formDescription.highlightDesc);
-listingForm.append('price', formDescription.price);
+      photos.forEach((photo) => {
+        listingForm.append("listingPhotos", photo);
+      });
+      /// post request
 
-photos.forEach((photo)=> {
-  listingForm.append("listingPhotos", photo)
-})
-/// post request
-
-const response = await fetch('http://localhost:3030/properties/create', {
-method: 'POST',
-body: listingForm
-})
-if(response.ok) {
-  toast.success('create listing sucessfull')
-  navigate('/')
-
-}
-
-
-  }
-  catch(err){
-console.log('publish listing failed', err.message);
-
-  }
-}
-
-
+      const response = await fetch("http://localhost:3030/properties/create", {
+        method: "POST",
+        body: listingForm,
+      });
+      if (response.ok) {
+        toast.success("create listing sucessfull");
+        navigate("/");
+      }
+    } catch (err) {
+      console.log("publish listing failed", err.message);
+    }
+  };
 
   return (
     <>
       <NavBar />
       <div className="creating-listing bg-gray-200 py-4 flex flex-col gap-6 px-10">
         <h1 className="text-4xl font-bold ">Publish your place</h1>
-        <form  onSubmit={handlePost} className="bg-white p-6 my-10 flex flex-col gap-12">
-
-            {/* ///creating ist step1 start */}
+        <form
+          onSubmit={handlePost}
+          className="bg-white p-6 my-10 flex flex-col gap-12"
+        >
+          {/* ///creating ist step1 start */}
           <div className="create-Listing-step-1 my-8">
             <h3 className="text-4xl  text-red-500 my-4 font-extrabold">
               Step 1: Tell us about your place
@@ -155,8 +149,9 @@ console.log('publish listing failed', err.message);
               {categories.map((item, index) => (
                 <div
                   key={index}
-                  className={`text border-2 border-gray-500 h-[200px] w-[280px] flex flex-col items-center gap-2 justify-center rounded-lg hover:bg-black hover:text-white active:scale-95 transition-all duration-200 ease-in-out  ${category === item.label ? "border-3 border-red-500" : ""
-                    } `}
+                  className={`text border-2 border-gray-500 h-[200px] w-[280px] flex flex-col items-center gap-2 justify-center rounded-lg hover:bg-black hover:text-white active:scale-95 transition-all duration-200 ease-in-out  ${
+                    category === item.label ? "border-3 border-red-500" : ""
+                  } `}
                   onClick={() => setcategory(item.label)}
                 >
                   <div className="icon text-3xl ">{item.icon}</div>
@@ -172,8 +167,9 @@ console.log('publish listing failed', err.message);
               {types?.map((item, index) => (
                 <div
                   key={index}
-                  className={`categories-type border flex justify-between items-center md:w-[80%] p-6 rounded-lg    ${type === item.name ? "border-3 border-red-500" : ""
-                    } `}
+                  className={`categories-type border flex justify-between items-center md:w-[80%] p-6 rounded-lg    ${
+                    type === item.name ? "border-3 border-red-500" : ""
+                  } `}
                   onClick={() => settype(item.name)}
                 >
                   <div className="text ">
@@ -230,6 +226,7 @@ console.log('publish listing failed', err.message);
                   type="text"
                   placeholder="City"
                   name="city"
+                  value={formLocation.city}
                   onChange={handleChangeLocation}
                 />
               </div>
@@ -352,10 +349,11 @@ console.log('publish listing failed', err.message);
             <div className="categories-boxes my-4  flex flex-wrap justify-center items-center gap-6 ">
               {facilities.map((item, index) => (
                 <div
-                  onClick={() => handleSelectAminities(item)}
+                  onClick={() => handleSelectAminities(item.name)}
                   key={index}
                   className={`text border-2 border-gray-500 h-[200px] w-[280px] flex flex-col items-center gap-2 justify-center rounded-lg hover:bg-black hover:text-white active:scale-95 transition-all duration-200 ease-in-out 
-                    ${amenities.includes(item) ? "border-3 border-red-500" : ""
+                    ${
+                      amenities.includes(item.name) ? "border-3 border-red-500" : ""
                     }  `}
                 >
                   <div className="icon text-3xl ">{item.icon}</div>
@@ -365,7 +363,7 @@ console.log('publish listing failed', err.message);
             </div>
 
             <h3 className="mt-[50px] text-3xl font-bold">
-              Add some photos of your place
+              Add some photos of your place .
             </h3>
 
             <DragDropContext onDragEnd={handleDragPhotos}>
@@ -466,7 +464,7 @@ console.log('publish listing failed', err.message);
                       )}
                     </div>
 
-                    { }
+                    {}
 
                     {provided.placeholder}
                   </div>
@@ -547,10 +545,13 @@ console.log('publish listing failed', err.message);
             </div>
           </div>
           <div className="text-center">
-  <button className=" p-4 text-4xl bg-blue-950 hover:to-blue-700 active:scale-95 transition-all duration-300 hover:shadow-xl hover:shadow-black text-white w-fit rounded-lg " type="submit" >Create your Listing</button>
-
+            <button
+              className=" p-4 text-3xl bg-blue-950 hover:bg-blue-700 active:scale-95 transition-all duration-300 hover:shadow hover:shadow-black text-white w-fit rounded-lg "
+              type="submit"
+            >
+              Create your Listing
+            </button>
           </div>
-        
         </form>
       </div>
     </>

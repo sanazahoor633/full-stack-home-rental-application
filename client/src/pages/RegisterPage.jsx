@@ -1,11 +1,11 @@
 import React, { useState } from "react";
- import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { FaArrowUp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [errors, seterrors] = useState({});
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setformData] = useState({
@@ -31,7 +31,7 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setloading(true)
+    setloading(true);
     let newErrors = {};
     let specialCharactor = /[!@#$%^&*(),.?":{}|<>_\-\\[\]\/+=~`]/;
     let capitalized = /[A-Z]/;
@@ -77,20 +77,21 @@ const Register = () => {
         method: "POST",
         body: register_form,
       });
+      const data = await response.json();
 
       if (response.ok) {
-        // console.log(response.message);
-        setloading(false)
-        toast.success('Signup sucessfull')
+        setloading(false);
+        toast.success("Signup sucessfull");
         navigate("/login");
       } else {
-        console.log(`registerration failed error ${response.message} `);
-        setloading(false)
-        
-      }
+        // console.log(`registeration failed error ${data.message} `);
+        toast.error(data.message || "Registration failed!");
+        setloading(false);
+      }``
     } catch (err) {
-      console.log("registered failed", err.message);
-      setloading(false)
+      toast.error(err.message || "Registration failed!");
+      // console.log("registered failed ", err.message);
+      setloading(false);
     }
   };
 
@@ -170,33 +171,32 @@ const Register = () => {
               onChange={handleOnchange}
             />
 
-<div className="flex flex-col justify-center items-center"> 
-            <label
-              htmlFor="profileImage"
-              className="flex flex-col items-center gap-2 mt-3"
-            >
-              <FaArrowUp className="text-3xl" />
-              <p>Upload Profile Photo</p>
-            </label>
+            <div className="flex flex-col justify-center items-center">
+              <label
+                htmlFor="profileImage"
+                className="flex flex-col items-center gap-2 mt-3"
+              >
+                <FaArrowUp className="text-3xl" />
+                <p>Upload Profile Photo</p>
+              </label>
 
-            {formData.profileImage && (
-              <div className="h-[100px] w-[100px]">
-              <img
-                src={URL.createObjectURL(formData.profileImage)}
-                alt="profile photo"
-                className="w-full h-full object-cover rounded-md mt-4 mx-auto"
-              />
-             
-              </div>
-
-
-            )}
+              {formData.profileImage && (
+                <div className="h-[100px] w-[100px]">
+                  <img
+                    src={URL.createObjectURL(formData.profileImage)}
+                    alt="profile photo"
+                    className="w-full h-full object-cover rounded-md mt-4 mx-auto"
+                  />
+                </div>
+              )}
             </div>
 
             <div className="flex justify-center items-center my-6 w-full">
-             
-              <button disabled={loading} className=" font-mono bg-blue-900 rounded-2xl w-1/2 p-2 text-center text-[20px] md:text-3xl hover:scale-95 active:scale-100 transition-active duration-300 disabled:bg-blue-600">
-                {loading ? 'Register...' : 'Register' }
+              <button
+                disabled={loading}
+                className=" font-mono bg-blue-900 rounded-2xl w-1/2 p-2 text-center text-[20px] md:text-3xl hover:scale-95 active:scale-100 transition-active duration-300 disabled:bg-blue-600"
+              >
+                {loading ? "Register..." : "Register"}
               </button>
             </div>
           </form>

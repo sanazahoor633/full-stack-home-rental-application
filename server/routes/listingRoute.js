@@ -1,9 +1,9 @@
 import express from "express";
-// import User from "../model/authModel.js";
+
 import Listing from "../model/listingModel.js";
 const router = express.Router();
 import multer from "multer";
-// import { listingDetails } from "../controllers/listingControllert.js";
+import { searchController } from "../controllers/search_controller.js";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -93,7 +93,7 @@ router.get("/", async (req, res) => {
         "creator"
       );
     } else {
-      listings = await Listing.find().populate('creator');
+      listings = await Listing.find().populate("creator");
     }
 
     res.status(200).json(listings);
@@ -101,27 +101,28 @@ router.get("/", async (req, res) => {
     res
       .status(409)
       .json({ message: "failed to fetch listing", error: err.message });
-    console.log(err);
   }
 });
 
+//get listings by search
+
+router.get("/search/:search", searchController);
 
 // listing detail
+router.get("/:listingId", async (req, res) => {
+  try {
+    const { listingId } = req.params;
+    const listing = await Listing.findById(listingId).populate(
+      "creator",
+      "firstname lastname profileImagePath"
+    );
+    if (!listing) {
+      return res.status(400).json({ message: "listing not found" });
+    }
 
-router.get('/:listingId', async (req, res) => {
-  try{
-const {listingId} = req.params
-const listing = await Listing.findById(listingId).populate('creator', 'firstname lastname profileImagePath');
-if(!listing) {
-  return res.status(400).json({message: 'listing not found'})
-}
-
-res.status(200).json(listing)
-  }
-  catch(err){
-res.status(400).json({error: err.message})
+    res.status(200).json(listing);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 export default router;
-
-

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   wishList: {
     type: Array,
     default: []
-  },
+  } ,
    propertyList: {
     type: Array,
     default: []
